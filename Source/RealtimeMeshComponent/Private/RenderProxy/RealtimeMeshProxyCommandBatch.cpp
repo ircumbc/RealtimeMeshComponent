@@ -105,10 +105,10 @@ namespace RealtimeMesh
 
 		AsyncTask(ENamedThreads::GameThread, [ThreadState, MeshWeak = TWeakPtr<FRealtimeMesh>(Mesh), bRecreateProxies = bRequiresProxyRecreate]()
 		{
-			if (const FRealtimeMeshPtr Mesh = MeshWeak.Pin())
+			if (const FRealtimeMeshPtr PinnedMesh = MeshWeak.Pin())
 			{
 				// TODO: We probably shouldn't always have to do this
-				Mesh->MarkRenderStateDirty(bRecreateProxies);
+				PinnedMesh->MarkRenderStateDirty(bRecreateProxies);
 			}
 
 			ThreadState->FinalizeGameThread();
